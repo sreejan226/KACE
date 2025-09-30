@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Left Section */}
         <div>
-          <h2 className="text-yellow-400 font-bold text-lg">IISERK MUNdane 2025</h2>
+          <h2 className="text-yellow-400 font-bold text-lg">MUNSOC NITA KACE 2025</h2>
           <p className="mt-3 text-sm leading-relaxed">
             Empowering young minds to solve global challenges through diplomatic
             dialogue and international cooperation.
