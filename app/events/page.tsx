@@ -1,15 +1,15 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import SlideArrowButton from "@/components/animata/button/ButtonArrow";
 
 export default function EventsComingSoon() {
-  // 15 days from now
-  const [timeLeft, setTimeLeft] = useState(15 * 24 * 60 * 60 * 1000); // milliseconds
+  // 15 days in milliseconds
+  const initialTimeLeft = 15 * 24 * 60 * 60 * 1000;
+  const [timeLeft, setTimeLeft] = useState(initialTimeLeft);
 
   useEffect(() => {
-    const targetTime = new Date().getTime() + timeLeft;
+    const targetTime = new Date().getTime() + initialTimeLeft;
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -18,7 +18,7 @@ export default function EventsComingSoon() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, []); // no dependencies, effect runs once
 
   // Convert milliseconds to days, hours, minutes, seconds
   const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -52,24 +52,19 @@ export default function EventsComingSoon() {
               {String(box.value).padStart(2, "0")}
             </span>
             <span className="text-sm text-white/80 mt-2">{box.label}</span>
-
-            {/* Thin spinning border */}
             <div className="absolute inset-0 border border-yellow-400 rounded-lg animate-spin-slow opacity-20"></div>
           </div>
         ))}
       </div>
 
       <div className="mt-12 flex gap-4 flex-wrap justify-center">
-        <Link
-          href="/"
-          className="0 text-black font-bold  rounded-full "
-        >
+        <Link href="/" className="0 text-black font-bold rounded-full">
           <SlideArrowButton
-              text="Back Home"
-              primaryColor="#d4a31b"
-              className="px-2 py-[6px] text-lg"
-              textClassName="text-black"
-            />
+            text="Back Home"
+            primaryColor="#d4a31b"
+            className="px-2 py-[6px] text-lg"
+            textClassName="text-black"
+          />
         </Link>
 
         {/* Scroll to contact section on home page */}

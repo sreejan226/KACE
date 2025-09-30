@@ -1,5 +1,3 @@
-import BoldCopy from "@/components/animata/text/bold-copy";
-import Header from "@/components/Header";
 import HeroSection from "@/components/sections/Hero";
 import EventsSection from "@/components/sections/Events";
 import UpdatesSection from "@/components/sections/Updates";
