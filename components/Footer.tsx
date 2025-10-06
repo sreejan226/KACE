@@ -26,28 +26,12 @@ export default function Footer() {
               <FaInstagram size={20} />
             </a>
             <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-yellow-400 hover:scale-110 transition-transform"
-            >
-              <FaTwitter size={20} />
-            </a>
-            <a
               href="https://linkedin.com/company/munsoc-nita"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-yellow-400 hover:scale-110 transition-transform"
             >
               <FaLinkedin size={20} />
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-yellow-400 hover:scale-110 transition-transform"
-            >
-              <FaFacebook size={20} />
             </a>
           </div>
         </div>

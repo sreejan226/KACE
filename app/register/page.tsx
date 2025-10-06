@@ -190,7 +190,7 @@ export default function RegisterPage() {
                 {/* Committee Preferences */}
                 <h2 className="form-section">Committee Preferences</h2>
                 <select {...register("committee1", { required: "Committee choice is required" })} className="input">
-                  <option value="">UN Women *</option>
+                  <option value="">Choose Committee *</option>
                   <option>UN Women</option>
                 </select>
                 {errors.committee1 && <span className="text-red-500 text-sm">{errors.committee1.message}</span>}

@@ -64,23 +64,23 @@ export default function HeroSection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-            <Link href="/register" className="rounded-full">
-              <SlideArrowButton
-                text="Register Now"
-                primaryColor="#000000"
-                className="px-4 py-[8px] text-base sm:text-lg"
-                textClassName="text-black"
-              />
-            </Link>
-            <Link href="/events" className="rounded-full">
-              <SlideArrowButton
-                text="View Events"
-                primaryColor="#d4a31b"
-                className="px-4 py-[8px] text-base sm:text-lg"
-                textClassName="text-black"
-              />
-            </Link>
+            <SlideArrowButton
+              text="Register Now"
+              href="/register"         // <-- navigation target
+              primaryColor="#000000"
+              className="px-4 py-[8px] text-base sm:text-lg"
+              textClassName="text-black"
+            />
+
+            <SlideArrowButton
+              text="View Events"
+              href="/events"           // <-- navigation target
+              primaryColor="#d4a31b"
+              className="px-4 py-[8px] text-base sm:text-lg"
+              textClassName="text-black"
+            />
           </div>
+
         </div>
 
         {/* Right Logo */}

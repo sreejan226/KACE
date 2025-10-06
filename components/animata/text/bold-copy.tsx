@@ -1,6 +1,8 @@
+"use client";
+
 import { Tourney } from "next/font/google";
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { useState } from "react";
 
 const tourney = Tourney({
   subsets: ["latin"],
@@ -11,19 +13,27 @@ export default function BoldCopy({
   className,
   textClassName,
   backgroundTextClassName,
-  onClick, // 👈 Added click handler support
+  onClick,
 }: {
   text: string;
   className?: string;
   textClassName?: string;
   backgroundTextClassName?: string;
-  onClick?: () => void; // optional
+  onClick?: () => void;
 }) {
+  const [clicked, setClicked] = useState(false);
+
   if (!text?.length) return null;
+
+  const handleClick = () => {
+    if (onClick) onClick();
+    setClicked(true);
+    setTimeout(() => setClicked(false), 300); // match animation duration
+  };
 
   return (
     <div
-      onClick={onClick}
+      onClick={handleClick}
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
       className={cn(
@@ -35,8 +45,12 @@ export default function BoldCopy({
       {/* Background faint text */}
       <div
         className={cn(
-          "text-2xl font-bold uppercase text-foreground/15 transition-all group-hover:opacity-50 md:text-5xl",
-          backgroundTextClassName
+          "text-2xl font-bold uppercase text-foreground/15 transition-all md:text-5xl",
+          backgroundTextClassName,
+          {
+            "opacity-50": clicked, // trigger fade like hover
+            "group-hover:opacity-50": !clicked, // keep normal hover behavior
+          }
         )}
       >
         {text}
@@ -45,8 +59,12 @@ export default function BoldCopy({
       {/* Foreground text */}
       <div
         className={cn(
-          "text-sm absolute font-bold uppercase text-foreground transition-all group-hover:text-2xl md:text-xl group-hover:md:text-5xl",
-          textClassName
+          "text-sm absolute font-bold uppercase text-foreground transition-all md:text-xl",
+          textClassName,
+          {
+            "text-2xl md:text-5xl": clicked, // trigger hover-scale on click
+            "group-hover:text-2xl md:group-hover:text-5xl": !clicked,
+          }
         )}
       >
         {text}
