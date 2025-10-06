@@ -49,7 +49,7 @@ export default function ContactSection() {
             <div>
               <p className="font-semibold text-yellow-400 text-lg">Email</p>
               <p className="text-white text-sm sm:text-base break-words">
-                sreejandas226@gmail.com
+                munsoc.nita@gmail.com
               </p>
             </div>
           </div>
