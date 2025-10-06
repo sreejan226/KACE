@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useMousePosition } from "@/hooks/use-mouse-position";
 import { cn } from "@/lib/utils";
 
@@ -11,32 +11,53 @@ interface EventCardProps {
   className?: string;
 }
 
-export default function EventCard({ icon, title, description, className }: EventCardProps) {
+export default function EventCard({
+  icon,
+  title,
+  description,
+  className,
+}: EventCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false); // for touch devices
 
-  const update = useCallback(({ x, y }: { x: number; y: number }) => {
-    if (!overlayRef.current) return;
-    const { width = 0, height = 0 } = overlayRef.current.getBoundingClientRect();
-    overlayRef.current.style.setProperty("--x", `${x - width / 2}px`);
-    overlayRef.current.style.setProperty("--y", `${y - height / 2}px`);
-  }, []);
+  // Mouse / Pointer position updates the shine
+  const update = useCallback(
+    ({ x, y }: { x: number; y: number }) => {
+      if (!overlayRef.current) return;
+      const { width = 0, height = 0 } = overlayRef.current.getBoundingClientRect();
+      overlayRef.current.style.setProperty("--x", `${x - width / 2}px`);
+      overlayRef.current.style.setProperty("--y", `${y - height / 2}px`);
+    },
+    []
+  );
 
   useMousePosition(containerRef, update);
+
+  // Touch / click handler
+  const handleTouch = () => {
+    setActive(true);
+    // remove shine after 1s
+    setTimeout(() => setActive(false), 1000);
+  };
 
   return (
     <div
       ref={containerRef}
+      onTouchStart={handleTouch}
       className={cn(
         "group relative overflow-hidden rounded-2xl bg-[#111111] p-6 shadow-md min-h-[220px] h-full glow-gold border",
-        className,
+        className
       )}
       style={{ borderColor: "rgba(255,213,77,0.35)" }}
     >
-      {/* subtle shiny overlay; does not change design colors */}
+      {/* subtle shiny overlay */}
       <div
         ref={overlayRef}
-        className="pointer-events-none absolute z-0 h-64 w-64 rounded-full bg-white/15 opacity-0 blur-3xl transition-opacity duration-200 group-hover:opacity-25"
+        className={cn(
+          "pointer-events-none absolute z-0 h-64 w-64 rounded-full bg-white/15 blur-3xl transition-opacity duration-200",
+          (active ? "opacity-25" : "group-hover:opacity-25")
+        )}
         style={{ transform: "translate(var(--x), var(--y))" }}
       />
 
@@ -53,11 +74,6 @@ export default function EventCard({ icon, title, description, className }: Event
           <p className="text-gray-200 text-sm">{description}</p>
         )}
       </div>
-
-      {/* show the shine on hover */}
-      <style jsx>{`
-        div:hover > div.pointer-events-none { opacity: 0.25; }
-      `}</style>
     </div>
   );
 }

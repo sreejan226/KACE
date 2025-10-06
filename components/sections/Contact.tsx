@@ -7,7 +7,9 @@ export default function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -31,36 +33,40 @@ export default function ContactSection() {
 
   return (
     <section
-      className="relative py-20 px-6 lg:px-16"
       id="contact"
+      className="relative py-16 px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24"
       style={{ background: "var(--hero-gradient-lr)" }}
     >
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-start text-white">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start text-white">
         {/* Left Info */}
-        <div className="space-y-6">
-          <h2 className="text-4xl font-bold text-yellow-400">Contact Information</h2>
+        <div className="space-y-8">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-yellow-400">
+            Contact Information
+          </h2>
 
-          <div className="flex items-center gap-3">
-            <Mail className="text-yellow-500 w-6 h-6" />
+          <div className="flex items-start gap-3 sm:gap-4">
+            <Mail className="text-yellow-500 w-6 h-6 sm:w-7 sm:h-7" />
             <div>
-              <p className="font-semibold text-yellow-400">Email</p>
-              <p className="text-white">sreejandas226@gmail.com</p>
+              <p className="font-semibold text-yellow-400 text-lg">Email</p>
+              <p className="text-white text-sm sm:text-base break-words">
+                sreejandas226@gmail.com
+              </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Phone className="text-yellow-500 w-6 h-6" />
+          <div className="flex items-start gap-3 sm:gap-4">
+            <Phone className="text-yellow-500 w-6 h-6 sm:w-7 sm:h-7" />
             <div>
-              <p className="font-semibold text-yellow-400">Phone</p>
-              <p className="text-white">+91 8132948021</p>
+              <p className="font-semibold text-yellow-400 text-lg">Phone</p>
+              <p className="text-white text-sm sm:text-base">+91 79086 17675</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <MapPin className="text-yellow-500 w-6 h-6" />
+          <div className="flex items-start gap-3 sm:gap-4">
+            <MapPin className="text-yellow-500 w-6 h-6 sm:w-7 sm:h-7" />
             <div>
-              <p className="font-semibold text-yellow-400">Address</p>
-              <p className="text-white">
+              <p className="font-semibold text-yellow-400 text-lg">Address</p>
+              <p className="text-white text-sm sm:text-base max-w-xs sm:max-w-sm">
                 Civil Building, Room-209, NIT Agartala
               </p>
             </div>
@@ -68,8 +74,10 @@ export default function ContactSection() {
         </div>
 
         {/* Right Form */}
-        <div className="bg-black/60 border border-yellow-600 rounded-2xl p-8 shadow-lg shadow-yellow-900/30">
-          <h3 className="text-2xl font-semibold text-yellow-400 mb-6">Quick Inquiry</h3>
+        <div className="bg-black/60 border border-yellow-600 rounded-2xl p-6 sm:p-8 md:p-10 shadow-lg shadow-yellow-900/30">
+          <h3 className="text-2xl md:text-3xl font-semibold text-yellow-400 mb-6">
+            Quick Inquiry
+          </h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
@@ -78,7 +86,7 @@ export default function ContactSection() {
               onChange={handleChange}
               placeholder="Your Name"
               required
-              className="w-full px-4 py-2 rounded-lg bg-gray-900 text-white border border-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm sm:text-base"
             />
             <input
               type="email"
@@ -87,7 +95,7 @@ export default function ContactSection() {
               onChange={handleChange}
               placeholder="Your Email"
               required
-              className="w-full px-4 py-2 rounded-lg bg-gray-900 text-white border border-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm sm:text-base"
             />
             <textarea
               name="message"
@@ -95,17 +103,19 @@ export default function ContactSection() {
               onChange={handleChange}
               placeholder="Your Message"
               required
-              className="w-full px-4 py-2 rounded-lg bg-gray-900 text-white border border-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 min-h-[120px]"
+              className="w-full px-4 py-3 rounded-lg bg-gray-900 text-white border border-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400 min-h-[120px] sm:min-h-[150px] text-sm sm:text-base"
             />
             <button
               type="submit"
-              className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold py-3 rounded-full transition"
+              className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold py-3 sm:py-3.5 rounded-full transition text-sm sm:text-base"
             >
               Send Message
             </button>
           </form>
 
-          {status && <p className="mt-4 text-sm">{status}</p>}
+          {status && (
+            <p className="mt-4 text-sm sm:text-base text-yellow-300">{status}</p>
+          )}
         </div>
       </div>
     </section>

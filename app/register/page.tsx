@@ -15,11 +15,11 @@ type FormData = {
   experience: string;
   previousConferences?: number;
   committee1: string;
+  house: string;
   unga1: string;
   unga2: string;
   unga3: string;
   unga4: string;
-  food: string;
   agree: boolean;
   updates?: boolean;
 };
@@ -71,7 +71,6 @@ export default function RegisterPage() {
               <li>📅 Dates: 8th – 9th November 2025</li>
               <li>🎓 Open to: All 1st years</li>
               <li>💰 Registration Fee: FREE</li>
-              <li>🍴 Food (Paid)</li>
               <li>📧 For queries: Contact MUNSOC</li>
             </ul>
           </div>
@@ -162,6 +161,15 @@ export default function RegisterPage() {
                 </select>
                 {errors.year && <span className="text-red-500 text-sm">{errors.year.message}</span>}
 
+                <select {...register("house", { required: "House selection is required" })} className="input">
+                  <option value="">Select House *</option>
+                  <option>Menon</option>
+                  <option>Kamboj</option>
+                  <option>Jaishankar</option>
+                  <option>Gokhle</option>
+                </select>
+                {errors.house && <span className="text-red-500 text-sm">{errors.house.message}</span>}
+
                 {/* MUN Experience */}
                 <h2 className="form-section">MUN Experience</h2>
                 <select {...register("experience", { required: "Experience is required" })} className="input">
@@ -182,7 +190,7 @@ export default function RegisterPage() {
                 {/* Committee Preferences */}
                 <h2 className="form-section">Committee Preferences</h2>
                 <select {...register("committee1", { required: "Committee choice is required" })} className="input">
-                  <option value="">First Choice Committee *</option>
+                  <option value="">UN Women *</option>
                   <option>UN Women</option>
                 </select>
                 {errors.committee1 && <span className="text-red-500 text-sm">{errors.committee1.message}</span>}
@@ -200,12 +208,6 @@ export default function RegisterPage() {
 
                 {/* Additional Information */}
                 <h2 className="form-section">Additional Information</h2>
-                <select {...register("food", { required: "Food preference is required" })} className="input">
-                  <option value="">Food Preference *</option>
-                  <option>Veg</option>
-                  <option>Non-Veg</option>
-                </select>
-                {errors.food && <span className="text-red-500 text-sm">{errors.food.message}</span>}
 
                 <label className="flex items-center gap-2 text-sm">
                   <input type="checkbox" {...register("agree", { required: "You must agree" })} /> I agree to the Terms and Conditions and Privacy Policy *

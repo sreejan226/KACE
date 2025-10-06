@@ -1,14 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import BoldCopy from "./animata/text/bold-copy";
 
 export default function Header() {
   return (
-    <div
-      className="fixed top-0 left-0 w-full z-50"
+    <header
+      className="fixed top-0 left-0 w-full z-50 backdrop-blur-md shadow-lg border-b border-yellow-400/20"
       style={{ background: "var(--hero-gradient-lr)" }}
     >
-      {/* Golden glowing underline */}
+      {/* Glowing golden underline */}
       <div
         className="absolute bottom-0 left-0 w-full h-[2px]"
         style={{ background: "var(--gold)" }}
@@ -19,14 +20,39 @@ export default function Header() {
         ></div>
       </div>
 
-      {/* Text on left */}
-      <div className="relative z-10 flex justify-start pl-16 py-4">
-        <BoldCopy
-          text="KACE 9"
-          textClassName="accent-gradient-text"
-          backgroundTextClassName="text-muted"
-        />
+      {/* Header Content */}
+      <div className="relative z-10 flex items-center justify-between px-8 py-4">
+        {/* Left Text (Clickable Home Link) */}
+        <Link href="/" className="group flex items-center gap-2">
+          <BoldCopy
+            text="KACE 9"
+            textClassName="accent-gradient-text transition-transform duration-300 group-hover:scale-105"
+            backgroundTextClassName="text-muted"
+          />
+        </Link>
+
+        {/* Right Side Quick Links */}
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <Link
+            href="/events"
+            className="text-gray-200 hover:text-yellow-400 transition"
+          >
+            Events
+          </Link>
+          <Link
+            href="/register"
+            className="text-gray-200 hover:text-yellow-400 transition"
+          >
+            Register
+          </Link>
+          <Link
+            href="/#contact"
+            className="text-gray-200 hover:text-yellow-400 transition"
+          >
+            Contact
+          </Link>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 }

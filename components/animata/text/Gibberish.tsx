@@ -11,9 +11,20 @@ interface GibberishTextProps {
    * The class name to apply to each letter.
    */
   className?: string;
+
+  /**
+   * Optional click handler.
+   */
+  onClick?: () => void;
 }
 
-const Letter = ({ letter, className }: { letter: string; className?: string }) => {
+const Letter = ({
+  letter,
+  className,
+}: {
+  letter: string;
+  className?: string;
+}) => {
   const [code, setCode] = useState(letter.toUpperCase().charCodeAt(0));
 
   useEffect(() => {
@@ -32,10 +43,10 @@ const Letter = ({ letter, className }: { letter: string; className?: string }) =
 
   return (
     <span className={cn("relative inline-block whitespace-pre", className)}>
-      {/* Invisible actual letter to reserve space */}
+      {/* Invisible letter to maintain spacing */}
       <span className="opacity-0">{letter}</span>
 
-      {/* Gibberish animation overlay */}
+      {/* Animated overlay */}
       <span className="absolute inset-0">
         {String.fromCharCode(code)}
       </span>
@@ -43,20 +54,28 @@ const Letter = ({ letter, className }: { letter: string; className?: string }) =
   );
 };
 
-/**
- * Animate each letter in the text using gibberish text effect.
- * Renders a random letter first and then animates it to the correct letter.
- */
-export default function GibberishText({ text, className }: GibberishTextProps) {
+export default function GibberishText({
+  text,
+  className,
+  onClick,
+}: GibberishTextProps) {
   return (
-    <>
+    <span
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      className={cn(
+        "inline-flex cursor-pointer select-none items-center outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+        className
+      )}
+    >
       {text.split("").map((letter, index) => (
         <Letter
           className={className}
           letter={letter}
-          key={`${index}-${letter}-${Math.random()}`} // ensures uniqueness
+          key={`${index}-${letter}-${Math.random()}`}
         />
       ))}
-    </>
+    </span>
   );
 }
